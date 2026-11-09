@@ -1,0 +1,39 @@
+<ConcertModeVisibility type="bool">false</ConcertModeVisibility>
+<ConcertModeStateHandler type="int">0</ConcertModeStateHandler>
+<ScooterList type="list">
+	
+	</ScooterList>
+<ScootersConnectedCount type="int">0</ScootersConnectedCount>
+<EnsureWifiPopup type="bool">false</EnsureWifiPopup>
+<ShareMusicPopup type="bool">false</ShareMusicPopup>
+<ShareMusicScooterName type="string">Scoot</ShareMusicScooterName>
+<HostScooterName type="string">Mad Masician</HostScooterName>
+<HostScooterNumber type="string">KA51 EZ 9396</HostScooterNumber>
+<ConcertModeInfoText type="string">12 scooters joined</ConcertModeInfoText>
+<ConcertButtonStates type="int">0</ConcertButtonStates>
+<ConcertModeTrackName type="string">Rowdy Baby</ConcertModeTrackName>
+<ConcertScootersAvailable type="bool">false</ConcertScootersAvailable>
+<ConcertStartAvl type="bool">false</ConcertStartAvl>
+<ConcertRetryVisibility type="bool">false</ConcertRetryVisibility>
+<HostScootersCount type="int">0</HostScootersCount>
+<ScooterListHost type="list">
+ 	
+</ScooterListHost>
+<ConcertSongsCount type="int">0</ConcertSongsCount>
+<ConcertSongTitle1 type="string">Hotel California.mp3</ConcertSongTitle1>
+<ConcertSongTitle2 type="string">Scoot</ConcertSongTitle2>
+<ConcertSongTitle3 type="string">Scoot</ConcertSongTitle3>
+<ConcertSongTitle4 type="string">Scoot</ConcertSongTitle4>
+<ConcertSongTitle5 type="string">Scoot</ConcertSongTitle5>
+<ConcertSongTitle6 type="string">Scoot sdkjfh;sfkjghdf;kj</ConcertSongTitle6>
+<ConcertSongSelected1 type="bool">false</ConcertSongSelected1>
+<ConcertSongSelected2 type="bool">false</ConcertSongSelected2>
+<ConcertSongSelected3 type="bool">false</ConcertSongSelected3>
+<ConcertSongSelected4 type="bool">false</ConcertSongSelected4>
+<ConcertSongSelected5 type="bool">false</ConcertSongSelected5>
+<ConcertSongSelected6 type="bool">false</ConcertSongSelected6>
+<ConcertWifiAvailable type="bool">false</ConcertWifiAvailable>
+<ConcertActiveLightState type="int">0</ConcertActiveLightState>
+<ConcertSkipSyncingPopup type="bool">false</ConcertSkipSyncingPopup>
+<ConcertDeleteSongPopup type="bool">false</ConcertDeleteSongPopup>
+

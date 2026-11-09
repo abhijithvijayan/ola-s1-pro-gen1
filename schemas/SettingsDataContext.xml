@@ -1,0 +1,30 @@
+<NetworkStateHandler type="int">0</NetworkStateHandler>			// Moved from OlaElectricDataSource
+<SettingsWidgetBrightnessControl type="int">50</SettingsWidgetBrightnessControl>
+<VolumeUpdate type="int">0</VolumeUpdate> 
+<ShowVolumePopup type="bool">false</ShowVolumePopup> 
+<CallVolumePopup type="bool">false</CallVolumePopup>
+<CallVolumeUpdate type="int">5</CallVolumeUpdate>
+<SettingsCurrentTheme type="int">0</SettingsCurrentTheme> 
+<EngineSoundToggle type="bool">false</EngineSoundToggle> 
+<VoiceAssistantToggle type="bool">false</VoiceAssistantToggle> 
+<VideoList type="list">
+       
+ </VideoList>
+<IsSunsetSunriseFlag type="int">0</IsSunsetSunriseFlag> 
+<MoodSoundToggle type="int">0</MoodSoundToggle>
+<SystemSoundToggle type="int">0</SystemSoundToggle>
+<GetHelpConnectivityIssue type="bool">false</GetHelpConnectivityIssue>
+<GetHelpEnterOTPScreen type="bool">false</GetHelpEnterOTPScreen>
+<GetHelpInvalidOTP type="bool">false</GetHelpInvalidOTP>
+<GetHelpOTP type="string">123456</GetHelpOTP>
+<GetHelpOTPCount type="int">6</GetHelpOTPCount>
+<GetHelpLoadingDot type="bool">true</GetHelpLoadingDot>
+<IsS1ProWithoutUpgrade type="bool">false</IsS1ProWithoutUpgrade>
+<IsS1AirFleetScooter type="bool">false</IsS1AirFleetScooter> 
+
+ 
+ 
+ 
+
+
+

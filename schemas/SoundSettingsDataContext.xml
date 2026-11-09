@@ -1,0 +1,13 @@
+<BoltBiteUpdate type="int">0</BoltBiteUpdate>
+<BoltAnalogCyberUpdate type="int">0</BoltAnalogCyberUpdate>
+<BoltButtonHandler type="int">0</BoltButtonHandler>
+<VintageAgeTimeUpdate type="int">0</VintageAgeTimeUpdate>
+<VintageSizeofMotor type="int">0</VintageSizeofMotor>
+<VintageButtonHandler type="int">0</VintageButtonHandler>
+<EclipseOrbitSizeUpdate type="int">0</EclipseOrbitSizeUpdate>
+<EclipseLunarPhase type="int">0</EclipseLunarPhase>
+<SoundCustomisationVolumeUpdate type="int">0</SoundCustomisationVolumeUpdate>
+<ResetButtonHandler type="int">0</ResetButtonHandler>
+<SoundCustomisationFailedPopup type="bool">false</SoundCustomisationFailedPopup>
+<SoundCustomisationAppliedPopup type="bool">false</SoundCustomisationAppliedPopup>
+<SoundCustomisationResetPopup type="bool">false</SoundCustomisationResetPopup>

@@ -1,0 +1,52 @@
+<AvoidFerriesState type="bool">false</AvoidFerriesState>											// Moved from SettingsDataSource
+<AvoidHighwayState type="bool">false</AvoidHighwayState>											// Moved from SettingsDataSource
+<AvoidTollsState type="bool">false</AvoidTollsState>											// Moved from SettingsDataSource
+<DisableVoiceInstructionState type="bool">false</DisableVoiceInstructionState>								// Moved from SettingsDataSource
+<IsNavigationActive type="bool">false</IsNavigationActive> 										// Moved from OlaElectricDataSource
+<ToggleNaviSpeedometer type="bool">false</ToggleNaviSpeedometer>
+<IsNavigationParkingActive type="bool">false</IsNavigationParkingActive>
+<IsNavigationReverseActive type="bool">false</IsNavigationReverseActive>
+<NavigationFavCell type="list">
+
+</NavigationFavCell>	
+<NavigationFavCell_OlaMaps type="list">
+
+</NavigationFavCell_OlaMaps>
+
+<PlugoutChargerPopup type="bool">false</PlugoutChargerPopup>	
+<AddSavedPlacesPopup type="bool">false</AddSavedPlacesPopup>
+<NavigationFlashEnable type="int">0</NavigationFlashEnable>
+<IsNavigationFeatureActive type="bool">false</IsNavigationFeatureActive> 	
+<PushNavigationPopupEnable type="bool">false</PushNavigationPopupEnable>
+<PushNavLocation type="string"></PushNavLocation>
+<MapSelect type="bool">false</MapSelect>
+<OlaMapsWidgetSelect type="bool">false</OlaMapsWidgetSelect>
+<SelectedMapsText type="string">MapMyIndia</SelectedMapsText>
+<TBTVisibilityHandler type="bool">false</TBTVisibilityHandler>
+<TBTIconSelect type="int">0</TBTIconSelect>
+<TBTDistanceText type="string">650 m</TBTDistanceText>
+<TBTInfoText type="string"></TBTInfoText>
+<TBTTotalDistance type="string">7.6 km</TBTTotalDistance>
+<TBTTotalTime type="string">1 hr 3 mins</TBTTotalTime>
+<ResumeNavigationVisibility type="bool">false</ResumeNavigationVisibility>
+<ResumeNavigationText type="string"></ResumeNavigationText>
+<MinimisedNaviScreen type="bool">false</MinimisedNaviScreen>
+
+<PushNavLocationTime type="string">00 min</PushNavLocationTime>
+<PushNavLocationDistance type="string">00.0 km</PushNavLocationDistance>
+
+<FlashCardNavigationLocation type="string"></FlashCardNavigationLocation>
+<FlashCardNavigationAddress type="string"></FlashCardNavigationAddress>
+<FlashCardNavigationTotalTime type="string">00:00</FlashCardNavigationTotalTime>
+<FlashCardNavigationTotalDistance type="string">00.0</FlashCardNavigationTotalDistance>
+<FlashCardNavigationArrivalTime type="string">00:00 am</FlashCardNavigationArrivalTime>			
+<MinimisedTBTNaviActive type="bool">false</MinimisedTBTNaviActive>
+<OlaMapsBottomSheetActive type="bool">false</OlaMapsBottomSheetActive>
+<!--<OlaMapsButtonHandler type="bool">true</OlaMapsButtonHandler>-->
+<OlaMapsFeedbackActive type="bool">false</OlaMapsFeedbackActive>
+
+<IsExitedfromGeoFence type="bool">false</IsExitedfromGeoFence>
+
+<MMIDiscontinuePopup type="bool">false</MMIDiscontinuePopup>
+<MMIPreviousValue type="int">0</MMIPreviousValue>
+<MMIDiscontinuedButtonHandler type="bool">false</MMIDiscontinuedButtonHandler>

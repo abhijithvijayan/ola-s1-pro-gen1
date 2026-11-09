@@ -1,0 +1,107 @@
+<ActiveSpeed type="int">0</ActiveSpeed>
+<AccelerationState type="int"></AccelerationState>
+<EnableAccStateDefaulr type="bool">false</EnableAccStateDefaulr>
+<turnindicatorleft type="bool">false</turnindicatorleft>
+<turnindicatorright type="bool">false</turnindicatorright>
+<BrakeWornOut type="bool">false</BrakeWornOut>
+<LowBeamActive type="bool">false</LowBeamActive>
+<HighBeamActive type="bool">false</HighBeamActive>
+<CruiseModeActive type="int">0</CruiseModeActive>
+<PositionLightActive type="bool">false</PositionLightActive>
+<DriveMode type="string">PARKED</DriveMode>
+<SideStandActive type="bool">false</SideStandActive>
+<LimpMode type="bool">false</LimpMode>
+<SideStandPopUp type="bool">false</SideStandPopUp>
+<TrunkOpenPopUp type="int">0</TrunkOpenPopUp>
+<CurrentVehicleState type="int">2</CurrentVehicleState> 
+				
+<VehicleSystemTime type="string">00:00 am</VehicleSystemTime>
+<S1XVehicleSystemTime type="string">00:00 AM</S1XVehicleSystemTime>
+<CurrentActiveThemeValue type="int">0</CurrentActiveThemeValue> 	
+<CurrentActiveMood type="int">0</CurrentActiveMood> 
+<LowBatteryPopup type="bool">false</LowBatteryPopup>
+<NoInternetPopup type="bool">false</NoInternetPopup>
+<InsufficientBatteryPopup type="bool">false</InsufficientBatteryPopup>
+<ScooterVariant type="int">3</ScooterVariant>
+<TrunkStatus type="int">0</TrunkStatus>  //0-trunk closed, 1-trunk open
+<scooterFault2Status type="int">0</scooterFault2Status>
+<scooterFault3Status type="bool">false</scooterFault3Status>
+
+<DailyDistance type="int">0</DailyDistance>
+<DailyTopSpeed type="int">0</DailyTopSpeed>
+<DailyAverageSpeed type="int">0</DailyAverageSpeed>
+
+<IsVehicleDriveModePressedInPark type="bool">false</IsVehicleDriveModePressedInPark>
+<IsReverseModePressedInPark type="bool">false</IsReverseModePressedInPark>
+<IsPowerButtonPressedWithoutBrake type="bool">false</IsPowerButtonPressedWithoutBrake>
+<IsPowerButtonPressedSpeedZero type="bool">false</IsPowerButtonPressedSpeedZero>
+<IsPowerButtonPressedSpeedNonZero type="bool">false</IsPowerButtonPressedSpeedNonZero>
+<IsSideStandOpenWhileMotorOn type="bool">false</IsSideStandOpenWhileMotorOn>
+
+
+<IsScooterFaultOccurs type="bool">false</IsScooterFaultOccurs>
+<NotificationPopUpHandler type="int">0</NotificationPopUpHandler>
+<UnplugChargertoRideToast type="bool">false</UnplugChargertoRideToast>
+
+<PopUpIconHandler type="int">0</PopUpIconHandler>
+<PopUpVisibilityHandler type="bool">false</PopUpVisibilityHandler>
+<PopUpTextHandler type="string">Unable to ride, please restart Scooter</PopUpTextHandler>
+<PopUpStyleHandler type="int">0</PopUpStyleHandler>
+<DerationScooterFaultVisible type="bool">false</DerationScooterFaultVisible>
+<DriveModeHandler type="int">0</DriveModeHandler>
+<UnlockFailedPopup type="bool">false</UnlockFailedPopup>
+<LockFailedPopup type="bool">false</LockFailedPopup>
+<HandleBarUnlockPopup type="bool">false</HandleBarUnlockPopup>
+<LockingProgress type="bool">false</LockingProgress>
+<HyperAnimationEnable type="bool">false</HyperAnimationEnable>
+<SpeechWakeup type="bool">false</SpeechWakeup>
+<SpeechStartHandler type="int">0</SpeechStartHandler>
+
+<APBActivationStatus type="bool">false</APBActivationStatus>
+<HillHoldStatus type="int">0</HillHoldStatus> 
+<HillHoldActivePopup type="bool">false</HillHoldActivePopup>
+<CurrentActiveRegenSetttings type="int">0</CurrentActiveRegenSetttings>
+<CurrentActiveRegenDials type="int">0</CurrentActiveRegenDials>
+<RegenActivationStatus type="bool">false</RegenActivationStatus>
+<RegenIconStatusBar type="bool">false</RegenIconStatusBar>
+<RegenDisableState type="bool">false</RegenDisableState>
+<TamperFallStatus type="int">0</TamperFallStatus>
+<RegenAnimationLoadingSelect type="int">4</RegenAnimationLoadingSelect>
+
+<DetectionSensitivitySetttings type="int">1</DetectionSensitivitySetttings>
+
+<CustomerSupportNum type="string">080-33113311</CustomerSupportNum>
+<AccidentDetectedPopup type="bool">false</AccidentDetectedPopup>
+
+<VacationModePopup type="bool">false</VacationModePopup>
+<VacationModeHandler type="int">0</VacationModeHandler>
+<LockOverridePopUp type="bool">false</LockOverridePopUp>
+<RideOverridePopUp type="bool">false</RideOverridePopUp>
+<RegenIntensityMultiplier type="real">.35</RegenIntensityMultiplier>
+<ThermalAlertPopup type="bool">false</ThermalAlertPopup>
+<ThermalAlertPopupText type="string">Thermal issue, please contact support immediately</ThermalAlertPopupText>
+
+<NotificaticationPopupEnable type="bool">false</NotificaticationPopupEnable>
+<NotificationPopupHeader type="string">Best hhkjyyhvhg ggtt jjkiib gggyy ppn </NotificationPopupHeader> 
+<NotificaticationAccept type="string">Accept</NotificaticationAccept>
+<NotificaticationDismiss type="string">Dismiss</NotificaticationDismiss>
+<NotificationHandler type="int">0</NotificationHandler>
+<CareTreeGrowthStage type="int">0</CareTreeGrowthStage>
+<TakeMeHomeLightsHandler type="bool">false</TakeMeHomeLightsHandler>
+<AutoTurnOffIndicatorToggle type="bool">false</AutoTurnOffIndicatorToggle>
+<TakeMeHomeVisibilityHandler type="int">2</TakeMeHomeVisibilityHandler>
+<ResetTripBPopupVisibility type="bool">false</ResetTripBPopupVisibility>
+<TripmeterResetFTUX type="int">0</TripmeterResetFTUX>
+<CareIntroductionPopup type="bool">false</CareIntroductionPopup>
+<UnlockedTreePopup type="bool">false</UnlockedTreePopup>
+<JourneyStatesVisibility type="bool">false</JourneyStatesVisibility>
+<CareTreeCount type="string">8th</CareTreeCount>
+<ProfileSwitchingProgress type="bool">false</ProfileSwitchingProgress>
+<IsDuxScreenActive type="bool">false</IsDuxScreenActive>
+<VehicleSystemDate type="string">01 Feb</VehicleSystemDate>
+<VehicleChargeStartTime type="string">00:00 am</VehicleChargeStartTime>
+
+<MMIDeprecationPopup type="bool">false</MMIDeprecationPopup>
+
+
+<MoveOSBadgeTakeMeHome type="bool">false</MoveOSBadgeTakeMeHome>

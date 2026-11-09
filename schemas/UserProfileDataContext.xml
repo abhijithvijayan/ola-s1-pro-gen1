@@ -1,0 +1,39 @@
+<ActiveUserName type="string"></ActiveUserName> 											
+<PassCodeText type="bool">false</PassCodeText>
+<PassCodeButtonCount type="int">0</PassCodeButtonCount>
+<RetryAttempts type="int">5</RetryAttempts>  
+<VehicleModelName type="string">Model Name</VehicleModelName>
+<PasscodeAttemptTimer type="string">00:00</PasscodeAttemptTimer>
+<ScooterName type="string">Ola Scooter</ScooterName>
+<RegistrationNumber type="string"></RegistrationNumber>
+<PurchasedDate type="string"></PurchasedDate>
+<ChangePasscodeHandler type="int">0</ChangePasscodeHandler>
+<PasscodeNotChangedPopup type="bool">false</PasscodeNotChangedPopup>
+<PasscodeUpdatedPopup type="bool">false</PasscodeUpdatedPopup>
+<SwitchUserVisibility type="bool">false</SwitchUserVisibility>
+<ProfileDeletedPopup type="bool">false</ProfileDeletedPopup>
+<ProfileDeletedPopupContent type="string"></ProfileDeletedPopupContent> 
+<FTUXScreenTrigger type="bool">false</FTUXScreenTrigger>	
+<OtaInstallationProgress type="bool">false</OtaInstallationProgress>	
+<UsersList type="list">
+	<items>
+       
+    </items> 
+</UsersList>
+<ScooterVariantDisabledText type="string">Your S1 Pro is disabled</ScooterVariantDisabledText>
+
+<PasscodeReverseFlow type="bool">false</PasscodeReverseFlow>
+<DriverDocumentDetails type="list">
+
+</DriverDocumentDetails>
+<DriverDocsAvailable type="bool">true</DriverDocsAvailable>
+<IsPrimaryUser type="bool">false</IsPrimaryUser>
+<IsOwnerUser type="bool">false</IsOwnerUser>
+<RidersListWithAccess type="string">User1,User2,User3</RidersListWithAccess>
+
+<SyncSettingsHandler type="int">0</SyncSettingsHandler>
+<PrimaryUserText type="string">You, Devaraju M, Alex Berry, Karan Chauhan</PrimaryUserText>
+<LastSyncedDate type="string">Never</LastSyncedDate>
+<IsRidersAvailable type="bool">false</IsRidersAvailable>
+<DUXScreenHandler type="int">0</DUXScreenHandler>
+<RideVehicleSelection type="int">1</RideVehicleSelection>

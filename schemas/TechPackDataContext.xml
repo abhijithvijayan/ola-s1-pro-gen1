@@ -1,0 +1,17 @@
+<TechPackFTUX type="bool">false</TechPackFTUX>
+<TechPackTrialStatus type="bool">false</TechPackTrialStatus>
+<TechPackStatusHeaderText type="string">Tech Pack Header Text</TechPackStatusHeaderText>
+<MoveOSUpgradePopup type="bool">false</MoveOSUpgradePopup>
+<MoveOSEndTomorrowUpgradePopup type="bool">false</MoveOSEndTomorrowUpgradePopup>
+<MoveOSFastChargingPopup type="bool">false</MoveOSFastChargingPopup>
+<MoveOSUnlockHillHoldPopup type="bool">false</MoveOSUnlockHillHoldPopup>
+<MoveOSUnlockCruisePopup type="bool">false</MoveOSUnlockCruisePopup>
+<TechPackUnlockPopup type="bool">false</TechPackUnlockPopup>
+<TechPackUnlockPopupSubtext type="string">Upgrade to MoveOS+ to unlock premium features</TechPackUnlockPopupSubtext>
+<TechPackReTrial type="bool">false</TechPackReTrial>
+<TechPackRemainderPopUp type="bool">false</TechPackRemainderPopUp>
+<MoveOSTrialProgressPopup type="bool">false</MoveOSTrialProgressPopup>
+<MoveOSTrialActivatedPopup type="bool">false</MoveOSTrialActivatedPopup>
+<TechPackPurchasedFTUX type="bool">false</TechPackPurchasedFTUX>
+<TrialEndDate type="string">May 29</TrialEndDate>
+<TechPackS1ProVariant type="bool">true</TechPackS1ProVariant>

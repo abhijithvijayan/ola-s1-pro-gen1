@@ -1,0 +1,16 @@
+<TimefencingRidingTime type="string">00:00 AM - 00:00 PM</TimefencingRidingTime>
+<TimefencingDay type="string">Sunday, Monday, Tuesday, Wednesday, Thursday, Friday & Saturday</TimefencingDay>
+<GofenceVisibility type="bool">false</GofenceVisibility> 
+<TimefenceVisibility type="bool">false</TimefenceVisibility>
+<SportModeVisibility type="bool">true</SportModeVisibility>
+<HyperModeVisibility type="bool">true</HyperModeVisibility>
+<TimefenceSunday type="bool">false</TimefenceSunday>
+<TimefenceMonday type="bool">false</TimefenceMonday>
+<TimefenceTuesday type="bool">false</TimefenceTuesday>
+<TimefenceWednesday type="bool">false</TimefenceWednesday>
+<TimefenceThursday type="bool">false</TimefenceThursday>
+<TimefenceFriday type="bool">false</TimefenceFriday>
+<TimefenceSaturday type="bool">false</TimefenceSaturday>
+<MoveOSBadgeAccessControls type="bool">false</MoveOSBadgeAccessControls>
+<TechPackGeoFenceVisibility type="int">2</TechPackGeoFenceVisibility>
+

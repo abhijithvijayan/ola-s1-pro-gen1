@@ -1,0 +1,355 @@
+// Extracted from /vendor/bin/diagnostics_server on a Gen 1 head unit.
+//
+// The Go binary embeds a serialized FileDescriptorProto for every .proto
+// it was compiled from. This file is that descriptor decoded back to
+// source — it is the authoritative definition, not a guess or a copy.
+//
+// 42 RPC methods, 26 messages, 20 enums.
+//
+// WARNING: some methods change vehicle state. Do not call SwUpdate*,
+// ProvisionVin, ProvisionConfig, ScooterModeChange, RemoveWifiCredentials,
+// GenerateCerts, RegisterInstallCerts, or Deinit unless you understand
+// exactly what they do.
+
+syntax = "proto3";
+
+package wifican;
+
+import "google/protobuf/empty.proto";
+
+option go_package = "./wifican";
+
+enum RespStatus {
+  RESP_NONE = 0;
+  RESP_SUCCESS = 1;
+  RESP_FAIL = 2;
+}
+
+enum RmtCmdList {
+  RMT_CMD_NONE = 0;
+  RMT_CMD_LCD_TEST = 1;
+  RMT_CMD_GPS_TEST = 2;
+  RMT_CMD_BT_TEST = 3;
+  RMT_CMD_BLE_TEST = 4;
+  RMT_CMD_WIFI_TEST = 5;
+  RMT_CMD_SPKR_TEST = 6;
+  RMT_CMD_MIC_TEST = 7;
+  RMT_CMD_MCU_CAL = 8;
+  RMT_CMD_VIN = 9;
+  RMT_CMD_PROV = 10;
+  RMT_CMD_SW_UPDATE = 11;
+  RMT_CMD_ESIM_TEST = 12;
+}
+
+enum RmtSubCmdLcd {
+  RMT_SUB_CMD_LCD_NONE = 0;
+  RMT_SUB_CMD_LCD_TEST_START = 1;
+  RMT_SUB_CMD_LCD_TEST_STOP = 2;
+}
+
+enum RmtSubCmdGps {
+  RMT_SUB_CMD_GPS_NONE = 0;
+  RMT_SUB_CMD_GPS_TEST_START = 1;
+  RMT_SUB_CMD_GPS_TEST_STOP = 2;
+}
+
+enum RmtSubCmdBt {
+  RMT_SUB_CMD_BT_NONE = 0;
+  RMT_SUB_CMD_BT_TEST_START = 1;
+  RMT_SUB_CMD_BT_TEST_STOP = 2;
+}
+
+enum RmtSubCmdBle {
+  RMT_SUB_CMD_BLE_NONE = 0;
+  RMT_SUB_CMD_BLE_TEST_START = 1;
+  RMT_SUB_CMD_BLE_TEST_STOP = 2;
+}
+
+enum RmtSubCmdWifi {
+  RMT_SUB_CMD_WIFI_NONE = 0;
+  RMT_SUB_CMD_WIFI_TEST_START = 1;
+  RMT_SUB_CMD_WIFI_TEST_STOP = 2;
+}
+
+enum RmtSubCmdSpkr {
+  RMT_SUB_CMD_SPKR_NONE = 0;
+  RMT_SUB_CMD_SPKR_TEST_START = 1;
+  RMT_SUB_CMD_SPRK_TEST_STOP = 2;
+}
+
+enum RmtSubCmdMic {
+  RMT_SUB_CMD_MIC_NONE = 0;
+  RMT_SUB_CMD_MIC_TEST_START = 1;
+  RMT_SUB_CMD_MIC_TEST_STOP = 2;
+}
+
+enum RmtSubCmdMcuCal {
+  RMT_SUB_CMD_MCU_NONE = 0;
+  RMT_SUB_CMD_MCU_CAL_START = 1;
+  RMT_SUB_CMD_MCU_CAL_STOP = 2;
+}
+
+enum RmtSubCmdVin {
+  RMT_SUB_CMD_VIN_NONE = 0;
+  RMT_SUB_CMD_VIN_GET = 1;
+  RMT_SUB_CMD_VIN_SET = 2;
+}
+
+enum RmtSubCmdProv {
+  RMT_SUB_CMD_PROV_NONE = 0;
+  RMT_SUB_CMD_PROV_START = 1;
+  RMT_SUB_CMD_PROV_STOP = 2;
+}
+
+enum RmtSubCmdSwUpdate {
+  RMT_SUB_CMD_SW_UPDATE_NONE = 0;
+  RMT_SUB_CMD_SW_UPDATE_START = 1;
+  RMT_SUB_CMD_SW_UPDATE_STOP = 2;
+}
+
+enum RmtSubCmdEsim {
+  RMT_SUB_CMD_ESIM_NONE = 0;
+  RMT_SUB_CMD_ESIM_TEST_START = 1;
+  RMT_SUB_CMD_ESIM_TEST_STOP = 2;
+}
+
+enum RmtCmdRespStatus {
+  RMT_CMD_RESP_NONE = 0;
+  RMT_CMD_RESP_SUCCESS = 1;
+  RMT_CMD_RESP_FAIL = 2;
+}
+
+enum VehicleOperationState {
+  VEHICLE_OP_STATE_NONE = 0;
+  VEHICLE_OP_STATE_MFG = 1;
+  VEHICLE_OP_STATE_CUST = 2;
+  VEHICLE_OP_STATE_SERVICE = 3;
+  VEHICLE_OP_STATE_DECOMMISSIONED = 4;
+}
+
+enum SwUpdateState {
+  SW_UPDATE_STATE_NONE = 0;
+  SW_UPDATE_STATE_IDLE = 1;
+  SW_UPDATE_STATE_UPLOAD_INITIALIZED = 2;
+  SW_UPDATE_STATE_UPLOAD_IN_PROGRESS = 3;
+  SW_UPDATE_STATE_UPLOAD_SUCCESS = 4;
+  SW_UPDATE_STATE_UPLOAD_FAILED = 5;
+  SW_UPDATE_STATE_INSTALLING_SYSTEM = 6;
+  SW_UPDATE_STATE_INSTALLING_BCM = 7;
+  SW_UPDATE_STATE_INSTALLING_BMS = 8;
+  SW_UPDATE_STATE_INSTALLING_BLE = 9;
+  SW_UPDATE_STATE_INSTALLING_MCU = 10;
+  SW_UPDATE_STATE_INSTALLING_AOSP = 11;
+  SW_UPDATE_STATE_REBOOTING = 12;
+  SW_UPDATE_STATE_SUCCESS = 13;
+  SW_UPDATE_STATE_FAILED = 14;
+}
+
+enum SwUpdateTrigger {
+  SW_UPDATE_TRIGGER_NONE = 0;
+  SW_UPDATE_TRIGGER_ALL = 1;
+  SW_UPDATE_TRIGGER_BCM = 2;
+  SW_UPDATE_TRIGGER_BMS = 3;
+  SW_UPDATE_TRIGGER_BLE = 4;
+  SW_UPDATE_TRIGGER_MCU = 5;
+  SW_UPDATE_TRIGGER_AOSP = 6;
+}
+
+enum SystemCmdList {
+  SYS_CMD_NONE = 0;
+  SYS_CMD_SOM = 1;
+}
+
+enum ConfigUpdateStatus {
+  CONFIG_UPDATE_INPROGRESS = 0;
+  CONFIG_UPDATE_SUCCESS = 1;
+  CONFIG_UPDATE_FAILURE = 2;
+}
+
+message Register {
+  repeated uint32 can_ids = 1;
+}
+
+message Response {
+  RespStatus status = 1;
+  string status_msg = 2;
+}
+
+message CANPacket {
+  bytes can_frame = 1;
+}
+
+message RmtCmdReq {
+  RmtCmdList cmd_id = 1;
+  RmtSubCmdLcd sub_cmd_lcd = 2;
+  RmtSubCmdGps sub_cmd_gps = 3;
+  RmtSubCmdBt sub_cmd_bt = 4;
+  RmtSubCmdBle sub_cmd_ble = 5;
+  RmtSubCmdWifi sub_cmd_wifi = 6;
+  RmtSubCmdSpkr sub_cmd_spkr = 7;
+  RmtSubCmdMic sub_cmd_mic = 8;
+  RmtSubCmdMcuCal sub_cmd_mcu_cal = 9;
+  RmtSubCmdVin sub_cmd_vin = 10;
+  RmtSubCmdProv sub_cmd_prov = 11;
+  RmtSubCmdSwUpdate sub_cmd_sw_update = 12;
+  string cmd_input_str = 13;
+  bytes cmd_input_bytes = 14;
+  RmtSubCmdEsim sub_cmd_esim = 15;
+}
+
+message RmtCmdResp {
+  RmtCmdList cmd_id = 1;
+  RmtCmdRespStatus resp_status = 2;
+  string resp_str = 3;
+  bytes resp_bytes = 4;
+}
+
+message NavigationConfig {
+  string VinNumber = 1;
+}
+
+message Vin {
+  string VinNumber = 1;
+}
+
+message Config {
+  string CountryCode = 1;
+  string RegionCode = 2;
+}
+
+message VehicleIdentifiers {
+  string manifest_json = 1;
+}
+
+message VehicleOperationMode {
+  VehicleOperationState cur_mode = 1;
+  uint64 modified_ts = 2;
+  string modified_ts_str = 3;
+  string modified_by = 4;
+}
+
+message SwUpdateStatus {
+  SwUpdateState status = 1;
+  string status_msg = 2;
+}
+
+message SwUpdateFileMetadataReq {
+  string name = 1;
+  uint32 size = 2;
+  string csum = 3;
+}
+
+message SwUpdateFileMetadataResp {
+  string name = 1;
+  uint32 size = 2;
+  string csum = 3;
+  string transfer_status = 4;
+}
+
+message SwUpdateFileChunk {
+  bytes chunk = 1;
+}
+
+message ConfigType {
+  string type = 1;
+}
+
+message SwUpdateTriggerCmd {
+  SwUpdateTrigger trigger = 1;
+}
+
+message SystemTestCmd {
+  SystemCmdList cmd_id = 1;
+  string resp_str = 2;
+  bytes resp_bytes = 3;
+}
+
+message SystemTestResp {
+  SystemCmdList cmd_id = 1;
+  RmtCmdRespStatus resp_status = 2;
+  string resp_str = 3;
+  bytes resp_bytes = 4;
+}
+
+message ConfigUpdateResp {
+  ConfigUpdateStatus status = 1;
+}
+
+message Connection {
+  string connection_name = 1;
+}
+
+message EcosDynoFlags {
+  RespStatus status = 1;
+  string ecos1 = 2;
+  string ecos2 = 3;
+  string dyno = 4;
+}
+
+message EcosFlag {
+  int32 ecosType = 1;
+  string flag = 2;
+}
+
+message DynoFlag {
+  string flag = 1;
+}
+
+message FileRequest {
+  bytes file_data = 1;
+  string file_path = 2;
+  string file_name = 3;
+}
+
+message Command {
+  string cmd_msg = 1;
+}
+
+message PackageName {
+  string name = 1;
+}
+
+service WifiCanRpc {
+  rpc Init (Register) returns (Response);
+  rpc Deinit (google.protobuf.Empty) returns (Response);
+  rpc CheckManifestFile (google.protobuf.Empty) returns (Response);
+  rpc ReadCanFrame (google.protobuf.Empty) returns (CANPacket);
+  rpc WriteCanFrame (CANPacket) returns (Response);
+  rpc ReadCanStream (google.protobuf.Empty) returns (stream CANPacket);
+  rpc WriteCanStream (stream CANPacket) returns (Response);
+  rpc CanDumpStream (google.protobuf.Empty) returns (stream CANPacket);
+  rpc GetVehicleOperationMode (google.protobuf.Empty) returns (VehicleOperationMode);
+  rpc SetVehicleOperationMode (VehicleOperationMode) returns (Response);
+  rpc SwUpdateFileClearCache (google.protobuf.Empty) returns (Response);
+  rpc SwUpdateFileTransferMeta (SwUpdateFileMetadataReq) returns (Response);
+  rpc SwUpdateFileTransfer (stream SwUpdateFileChunk) returns (SwUpdateFileMetadataResp);
+  rpc SwUpdateTriggerUpgrade (SwUpdateTriggerCmd) returns (Response);
+  rpc SwUpdateCheckStatus (google.protobuf.Empty) returns (SwUpdateStatus);
+  rpc SwUpdateTestSetStatus (SwUpdateStatus) returns (Response);
+  rpc SetEcosFlag (EcosFlag) returns (Response);
+  rpc SetDynoFlag (DynoFlag) returns (Response);
+  rpc GetEcosDynoFlags (google.protobuf.Empty) returns (EcosDynoFlags);
+  rpc GetSwVersion (google.protobuf.Empty) returns (Response);
+  rpc GetAospVersion (google.protobuf.Empty) returns (Response);
+  rpc GenerateCerts (google.protobuf.Empty) returns (Response);
+  rpc RegisterInstallCerts (google.protobuf.Empty) returns (Response);
+  rpc ValidateCerts (google.protobuf.Empty) returns (Response);
+  rpc RegisterNavigation (NavigationConfig) returns (Response);
+  rpc ProvisionVin (Vin) returns (Response);
+  rpc ProvisionConfig (Config) returns (Response);
+  rpc GetVehicleIdentifiers (google.protobuf.Empty) returns (VehicleIdentifiers);
+  rpc ConfigUpdate (google.protobuf.Empty) returns (ConfigUpdateResp);
+  rpc TechPackUpdate (ConfigType) returns (ConfigUpdateResp);
+  rpc RemoveWifiCredentials (google.protobuf.Empty) returns (Response);
+  rpc ClearStorage (PackageName) returns (Response);
+  rpc ScooterModeChange (google.protobuf.Empty) returns (Response);
+  rpc RemoteRunTestCmd (RmtCmdReq) returns (RmtCmdResp);
+  rpc InitConnection (Connection) returns (Response);
+  rpc LocalGetConnection (google.protobuf.Empty) returns (stream Connection);
+  rpc LocalRunTestStream (stream RmtCmdResp) returns (stream RmtCmdReq);
+  rpc LocalGetTestCmd (google.protobuf.Empty) returns (RmtCmdReq);
+  rpc LocalSendTestResp (RmtCmdResp) returns (Response);
+  rpc pushFile (FileRequest) returns (Response);
+  rpc ExecuteADBCommand (Command) returns (Response);
+  rpc RunSystemTestCmd (SystemTestCmd) returns (SystemTestResp);
+}

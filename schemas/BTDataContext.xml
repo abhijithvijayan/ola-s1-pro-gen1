@@ -1,0 +1,51 @@
+<BTStateHandler type="int">0</BTStateHandler>    	0-off,1-BT on/disconnected,2-connected,3-connected no music									 	0-off,1-BT on/disconnected,2-connected,3-connected no music
+<MediaStateHandler type="int">0</MediaStateHandler>    										// Default(1) MEDIA_STOP(0), MEDIA_PAUSE(1), MEDIA_PLAY(2) New Data source to media state
+
+<MusicWidgetFillBarHandler type="int">0</MusicWidgetFillBarHandler> 								// Moved from widget data source
+<MusicWidgetPlaybackTimeHandler type="string">00:00</MusicWidgetPlaybackTimeHandler> 						// Moved from widget data source
+<MusicWidgetPlaybackTimeLeftHandler type="string">-00:00</MusicWidgetPlaybackTimeLeftHandler>					// Moved from widget data source
+<MusicWidgetTrackNameHandler type="string"></MusicWidgetTrackNameHandler>						// Moved from widget data source
+<MusicWidgetTrackDetailsHandler type="string"></MusicWidgetTrackDetailsHandler>  					// Moved from widget data source
+<MusicWidgetTrackAlbumArtUrl type="string"></MusicWidgetTrackAlbumArtUrl>  					//
+<MusicOnSpeaker type="bool">false</MusicOnSpeaker> 										// Moved from settings data source
+<MusicAlbumArtValue type="int">0</MusicAlbumArtValue>
+<CallerName type="string">+</CallerName>
+<ScooterBTName type="string"></ScooterBTName> 										// To be handled in backend
+<CallerNumber type="string"></CallerNumber>
+<ActiveCallTime type="string">00:00</ActiveCallTime> 
+<CurrentPhoneCallStatus  type="int">3</CurrentPhoneCallStatus>   	
+<MuteOngoingCall type="bool">false</MuteOngoingCall>								
+									
+									
+
+<ProximityPairingStatus type="bool">false</ProximityPairingStatus> 
+<ProximityPasscode type="string">123456</ProximityPasscode>
+<MessageSentPopup type="bool">false</MessageSentPopup>
+<BTPairingAcceptPopup type="bool">false</BTPairingAcceptPopup>
+<BTPairingPasscode type="string">369258</BTPairingPasscode>
+<BtOnPopupStatus type="bool">false</BtOnPopupStatus>
+<BtPairedDevicesAvl type="bool">false</BtPairedDevicesAvl>
+<PairedDeviceCount  type="int">0</PairedDeviceCount>
+<CurrentSongTime type="int">1</CurrentSongTime>
+<TotalSongTime type="int">1</TotalSongTime>
+<ScooterControlsHandler type="int">0</ScooterControlsHandler>
+<SearchingForDevices type="bool">false</SearchingForDevices>
+<IsIncomingCallAllowed type="bool">false</IsIncomingCallAllowed>
+
+
+<BTConnectDisconnectPopup type="int">0</BTConnectDisconnectPopup>
+<BTPopupDeviceName type="string"></BTPopupDeviceName>
+<DeviceConnectedPopup type="bool">false</DeviceConnectedPopup>
+<DeviceDisconnectedPopup type="bool">false</DeviceDisconnectedPopup>
+<DevicePairingFailedPopup type="bool">false</DevicePairingFailedPopup>
+<PartyModeHandler type="bool">false</PartyModeHandler>
+<SyncPopupEnable type="bool">false</SyncPopupEnable>
+<SyncCallsSignal type="int">3</SyncCallsSignal>
+<IsRejectCallAllowed type="bool">false</IsRejectCallAllowed>
+<RejectCallText type="string">Hey, I'm riding my Ola Scooter. I'll call you back later</RejectCallText>
+<IsIncomingCallEnabled type="bool">true</IsIncomingCallEnabled>
+<ConcertModeActive type="bool">false</ConcertModeActive>
+<ConcertModeScooter type="int">1</ConcertModeScooter>
+<IsBTFavSyncAllowed type="bool">false</IsBTFavSyncAllowed>
+<BTDeviceNameSettings type="string"></BTDeviceNameSettings>
+

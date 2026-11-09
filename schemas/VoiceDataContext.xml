@@ -1,0 +1,4 @@
+<VoiceHandler type="int">0</VoiceHandler>
+<VoiceHandlerText type="string">Play Music</VoiceHandlerText>
+<VoiceAssistantErrorPopUp type="bool">false</VoiceAssistantErrorPopUp>
+<EnableVoiceAssistantPopUp type="bool">false</EnableVoiceAssistantPopUp>

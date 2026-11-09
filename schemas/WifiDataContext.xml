@@ -1,0 +1,40 @@
+<WifiStateHandler type="int">0</WifiStateHandler>  
+<WifiToggleButton type="bool">false</WifiToggleButton>         		// WIFI_ON(0), WIFI_RANGE_0(1), WIFI_RANGE_1(2), WIFI_RANGE_2(3), WIFI_RANGE_3(4), WIFI_OFF(5) Moved from OlaElectricDataSource
+
+<NearByNetworkList type="list">
+	
+  
+</NearByNetworkList>
+<WifiScrambledPwd type="string"></WifiScrambledPwd> 
+<WifiActualPwd type="string"></WifiActualPwd> 
+<WifiIncorrectPassword type="bool">false</WifiIncorrectPassword>//0-Main 1-Password 2-Details
+<WifiIsConnectedDevice type="int">0</WifiIsConnectedDevice>//0-Main 1-Password 2-Details
+<WifiConnectedName type="string"></WifiConnectedName>
+<WifiIconHandler type="int">0</WifiIconHandler>
+
+<Status type="string">Connected</Status>
+<InternetAccess type="string">NA</InternetAccess>
+<SignalStrength type="string">NA</SignalStrength>
+<Frequency type="string">NA</Frequency>
+<Security type="string">NA</Security>
+<IPAddress type="string"></IPAddress>
+<NetworkUsage type="string"></NetworkUsage>
+<Privacy type="string"></Privacy>
+<MACAddress type="string"></MACAddress>
+<LinkSpeed type="string">NA</LinkSpeed>
+<Gateway type="string"></Gateway>
+<SubnetMask type="string"></SubnetMask>
+<DNS type="string"></DNS>
+<TransmitLinkSpeed type="string"></TransmitLinkSpeed>
+<ReceiveLinkSpeed type="string"></ReceiveLinkSpeed>
+<IPV6Address type="string"></IPV6Address>
+<WifiLoadingAnim type="bool">false</WifiLoadingAnim>
+<WifiConnectDisconnectStatus type="int">0</WifiConnectDisconnectStatus>
+<WifiConnectedPopup type="bool">false</WifiConnectedPopup>
+<WifiConnectionFailedPopup type="bool">false</WifiConnectionFailedPopup>
+<WifiConnectButtonEnable type="bool">false</WifiConnectButtonEnable>
+<WifiGotoConnectName type="string"></WifiGotoConnectName>
+<WifiDisconnectedPopup type="bool">false</WifiDisconnectedPopup>
+<NoInternetPopup type="bool">false</NoInternetPopup>
+<ConnectedNoInternetPopup type="bool">false</ConnectedNoInternetPopup>
+<NearByNetworkListCount type="int">0</NearByNetworkListCount>

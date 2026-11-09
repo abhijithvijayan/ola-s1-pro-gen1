@@ -1,0 +1,28 @@
+<LeftVintageWidgetUrl type="string">kzb://ola_electric/Prefabs/DynamicWidget_MusicVintage</LeftVintageWidgetUrl>
+<RightVintageWidgetUrl type="string">kzb://ola_electric/Prefabs/DynamicWidget_NewRangeVintage_MultiTrip</RightVintageWidgetUrl>
+
+<LeftBoltWidgetUrl type="string">kzb://ola_electric/Prefabs/DynamicWidget_MusicBolt_Left</LeftBoltWidgetUrl>
+<RightBoltWidgetUrl type="string">kzb://ola_electric/Prefabs/DynamicWidget_NewRangeBolt_MultiTrip_Left</RightBoltWidgetUrl>
+<LeftBoltExcluseWidgetUrl type="string">kzb://ola_electric/Prefabs/DynamicWidget_NewRangeBolt_MultiTrip_Right</LeftBoltExcluseWidgetUrl>
+<RightBoltExcludeWidgetUrl type="string">kzb://ola_electric/Prefabs/DynamicWidget_MusicBolt_Left</RightBoltExcludeWidgetUrl>
+
+
+<LeftEclipseWidgetUrl type="string">kzb://ola_electric/Prefabs/DynamicWidget_MusicDefault</LeftEclipseWidgetUrl>
+<RightEclipseWidgetUrl type="string">kzb://ola_electric/Prefabs/DynamicWidget_NewRangeDefault_MultiTrip</RightEclipseWidgetUrl>
+
+<LeftCareWidgetUrl type="string">kzb://ola_electric/Prefabs/DynamicWidget_MoneySaved_CareG_New</LeftCareWidgetUrl>
+<RightCareWidgetUrl type="string">kzb://ola_electric/Prefabs/DynamicWidget_CO2AvoidedCareG</RightCareWidgetUrl>
+
+
+<MinNavEclipseTopWidgetUrl type="string">kzb://ola_electric/Prefabs/MinimiseNavigation_DW_Range</MinNavEclipseTopWidgetUrl>
+<MinNavEclipseBottomWidgetUrl type="string">kzb://ola_electric/Prefabs/MinimiseNavigation_DW_Music</MinNavEclipseBottomWidgetUrl>
+
+<MinNavBoltTopWidgetUrl type="string">kzb://ola_electric/Prefabs/MinimiseNavigation_DW_Range_Bolt</MinNavBoltTopWidgetUrl>
+<MinNavBoltBottomWidgetUrl type="string">kzb://ola_electric/Prefabs/MinimiseNavigation_DW_Music_Bolt</MinNavBoltBottomWidgetUrl>
+
+<MinNavCareTopWidgetUrl type="string">kzb://ola_electric/Prefabs/MinimiseNavigation_DW_Range_Care</MinNavCareTopWidgetUrl>
+<MinNavCareBottomWidgetUrl type="string">kzb://ola_electric/Prefabs/MinimiseNavigation_DW_Music_Care</MinNavCareBottomWidgetUrl>
+
+<MinNavVintageTopWidgetUrl type="string">kzb://ola_electric/Prefabs/Minimizenavigation_DW_VintageRange</MinNavVintageTopWidgetUrl>
+<MinNavVintageBottomWidgetUrl type="string">kzb://ola_electric/Prefabs/Minimizenavigation_DW_VintageMusic</MinNavVintageBottomWidgetUrl>
+

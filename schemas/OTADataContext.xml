@@ -1,0 +1,37 @@
+<OTAActiveScreenValue type="int">11</OTAActiveScreenValue> // 0 - Update available												
+<DownloadFillBarValue type="int">3</DownloadFillBarValue> //0 to 100
+<InstallFillBarValue type="int">20</InstallFillBarValue> //0 to 100
+<OTAVersionName type="string">Ver.1.0</OTAVersionName>
+<SwInstallingTextValue type="string">Installing..</SwInstallingTextValue>
+<OTAUpdateTimeLeft type="string">0</OTAUpdateTimeLeft>
+<OTALastUpdateDateTime type="string">15 Sept, 18:30 PM</OTALastUpdateDateTime>
+<OTATimeLefttoInstall type="string">30 mins</OTATimeLefttoInstall>
+<NewUpdateAvailable type="bool">false</NewUpdateAvailable>
+<NewUpdateSize type="string">0</NewUpdateSize>
+<InstallButtonActive type="int">2</InstallButtonActive>
+<DownloadProgressIcon type="bool">false</DownloadProgressIcon>
+<OTAUpdateIcon type="int">0</OTAUpdateIcon>
+<InstallationErrorPopup type="bool">false</InstallationErrorPopup>
+<UpdatesReadyToInstall type="bool">false</UpdatesReadyToInstall>
+<IsReleaseLogsAvailable type="bool">false</IsReleaseLogsAvailable>
+<OTAInstallationRetry type="bool">false</OTAInstallationRetry>
+<OTASettingsIcon type="int">0</OTASettingsIcon>
+<OTAReleaseLogsCount type="int">0</OTAReleaseLogsCount>
+<OTAReleaseLog type="list">
+
+ </OTAReleaseLog>
+ <CurrentAutoDownload type="bool">true</CurrentAutoDownload>
+ <OTADownloadStarted type="bool">false</OTADownloadStarted>
+ <OTAPreInstallationRetryDownload type="bool">false</OTAPreInstallationRetryDownload>
+ <DownloadButtonActive type="int">1</DownloadButtonActive>
+ <OTAScooterUptodate type="bool">false</OTAScooterUptodate>
+ <OTATurnOnWifiPopup type="bool">false</OTATurnOnWifiPopup>
+ <OTAScooterRetryingDownload type="bool">false</OTAScooterRetryingDownload>
+ <InstallationFailed type="bool">false</InstallationFailed>
+ <InstallationFailedPermanentlyPopup type="bool">false</InstallationFailedPermanentlyPopup>
+ <DownloadFailedPermanentlyPopup type="bool">false</DownloadFailedPermanentlyPopup>
+ <DownloadFailedPopup type="bool">false</DownloadFailedPopup>
+ <DownloadPausedPopup type="bool">false</DownloadPausedPopup>
+ <ConnectToWifiPopup type="bool">false</ConnectToWifiPopup>
+ <DownloadPausedWifiOnlyText type="int">0</DownloadPausedWifiOnlyText>
+ <DownloadPausedNoWifi type="bool">false</DownloadPausedNoWifi>

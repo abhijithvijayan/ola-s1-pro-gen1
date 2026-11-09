@@ -1,0 +1,79 @@
+<APBToggleButton type="bool">false</APBToggleButton>
+<FallDetectionToggle type="bool">false</FallDetectionToggle>
+<TowTamperToggle type="bool">false</TowTamperToggle>
+<ProximityToggleButton type="bool">false</ProximityToggleButton>
+<HillHoldAssistToggle type="bool">false</HillHoldAssistToggle>
+<SmartHeadLightToggle type="bool">true</SmartHeadLightToggle>
+<SmartDRLLightToggle type="bool">true</SmartDRLLightToggle>
+<AutoHeadLightToggle type="bool">true</AutoHeadLightToggle>
+<HazardLightToggle type="bool">false</HazardLightToggle>
+<AutoTurnOffIndicator type="bool">true</AutoTurnOffIndicator>
+<MotorCutOffToggle type="bool">false</MotorCutOffToggle>
+<VacationModeToggle type="bool">false</VacationModeToggle>
+<SideStandToggle type="bool">false</SideStandToggle>
+<PredictedRangeToggle type="bool">false</PredictedRangeToggle>
+
+
+<SmartLightHandler type="int">0</SmartLightHandler>
+<AlarmSoundHandler type="int">0</AlarmSoundHandler>
+<ScooterCalibrationHandler type="int">0</ScooterCalibrationHandler>
+<ScooterCalibrationEnable type="bool">false</ScooterCalibrationEnable>
+<ScooterCalibrationFailedPopup type="bool">false</ScooterCalibrationFailedPopup>
+<ScooterCalibratonSuccessPopup type="bool">false</ScooterCalibratonSuccessPopup>
+
+<APBVisibilty type="bool">false</APBVisibilty>
+<FallDetectionVisibility type="bool">false</FallDetectionVisibility>
+<TowTamperVisibility type="int">2</TowTamperVisibility>
+<ProximityVisibility type="bool">true</ProximityVisibility>
+<VacationModeVisibility type="bool">true</VacationModeVisibility>
+<HillHoldVisibility type="int">2</HillHoldVisibility>
+<SmartHeadLightVisibility type="bool">false</SmartHeadLightVisibility>
+<SmartDRLLightVisibility type="bool">false</SmartDRLLightVisibility>
+<AutoHeadLightVisibility type="bool">true</AutoHeadLightVisibility>
+<HazardLightVisibility type="bool">true</HazardLightVisibility>
+<AutoIndicatorVisibility type="bool">true</AutoIndicatorVisibility>
+<MotorCutOffVisibility type="bool">false</MotorCutOffVisibility>
+<SideStandVisibility type="bool">false</SideStandVisibility>
+<PredictedRangeVisibility type="bool">false</PredictedRangeVisibility>
+
+<BatteryHealth type="bool">false</BatteryHealth>
+<BatterySettingsIcon type="bool">false</BatterySettingsIcon>
+<ReducedPerformanceBatterySetting type="int">0</ReducedPerformanceBatterySetting>
+
+<HillHoldProgressPopup type="bool">false</HillHoldProgressPopup>
+<HillHoldProgressPopupText type="string">Hill Hold Activating</HillHoldProgressPopupText>
+<BatterySoHHeader type="string">Best practices to prolong battery life of the scooter:</BatterySoHHeader>
+<BatterySoHLogCount type="int">3</BatterySoHLogCount>
+<BatterySoHLog type="list">
+	<items>
+        <BatterySoHLogItem>
+            <SoHDesc1 type="string">Ensure that you are charging your battery to 100% at least once in every 500 kms</SoHDesc1>
+        </BatterySoHLogItem>
+    </items>
+	<items>
+        <BatterySoHLogItem>
+            <SoHDesc1 type="string">Avoid using hyper charging frequently for charging your scooter</SoHDesc1>
+        </BatterySoHLogItem>
+    </items>
+	
+	<items>
+        <BatterySoHLogItem>
+            <SoHDesc1 type="string">Ensure that you are leaving your battery at a medium charging state if you are going on a vacation</SoHDesc1>
+        </BatterySoHLogItem>
+    </items>
+ </BatterySoHLog>
+ <BatterySoHDescription type="string">You might experience reduced range due to aging of your battery</BatterySoHDescription>
+ <HillHoldRetryPopup type="bool">false</HillHoldRetryPopup>
+ <HillHoldCustomerPopup type="bool">false</HillHoldCustomerPopup>
+ <HillHoldDisclaimerPopup type="bool">false</HillHoldDisclaimerPopup>
+ <TamperDetectionPopup type="bool">false</TamperDetectionPopup>
+ <RegenEnable type="bool">true</RegenEnable>
+<TakeMeHomeLightsTimer type="int">45</TakeMeHomeLightsTimer>
+
+
+<MoveOSBadgeRegen type="bool">false</MoveOSBadgeRegen>
+<MoveOSBadgeHillHold type="bool">false</MoveOSBadgeHillHold>
+<MoveOSBadgeTowTamper type="bool">false</MoveOSBadgeTowTamper>
+<RegenTextVisibilityHandler type="int">2</RegenTextVisibilityHandler>
+
+

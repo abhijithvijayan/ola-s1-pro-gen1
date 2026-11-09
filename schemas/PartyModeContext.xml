@@ -1,0 +1,10 @@
+<AudioLevelPatyMode1 type="float">0</AudioLevelPatyMode1>    								
+<AudioLevelPatyMode2 type="float">0</AudioLevelPatyMode2>    
+<AudioLevelPatyMode3 type="float">0</AudioLevelPatyMode3>    
+<AudioLevelPatyMode4 type="float">0</AudioLevelPatyMode4>    
+<AudioLevelPatyMode5 type="float">0</AudioLevelPatyMode5>    
+<AudioLevelPatyMode6 type="float">0</AudioLevelPatyMode6>
+<PartyModeActivated type="bool">false</PartyModeActivated> 
+<PartyModeEndedPopup type="bool">false</PartyModeEndedPopup>  
+<PartyModeFeatureEnable type="bool">true</PartyModeFeatureEnable>
+<ActivatePartyModePopup type="bool">false</ActivatePartyModePopup> 
