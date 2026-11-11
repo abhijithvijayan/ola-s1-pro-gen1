@@ -53,7 +53,7 @@ service open_port  /system/bin/iptables -I INPUT -p tcp --match multiport \
 
 ## Two things this tells us
 
-### 1. The scooter is ALWAYS in `mfg` on boot
+### 1. The scooter is ALWAYS in `mfg` on boot (on this build)
 
 The `on post-fs-data` trigger runs unconditionally at every boot. It sets the property to `"mfg"`, which cascades to `start open_port` → iptables ACCEPT on 50005 and 5555. That is why `scripts/inject-adb-key.sh` and gRPC ever worked in the first place. It is not a custom state anyone enabled.
 
@@ -76,6 +76,77 @@ Practical implications:
 Our scripts don't expose a setter for this property because we never need it — the device is already in `mfg` by design.
 
 If you want to test stock-like network behaviour without reboot access, use `serv` instead (same `open_port` side effects, clearer intent in the log).
+
+### 3. The boot-time reset is not on every MoveOS build
+
+The `on post-fs-data` hook that unconditionally writes `mfg` is what keeps the diagnostics ports open on this scooter. On **MoveOS 4.0.1** another owner reports the ports are firewalled at boot, which means that hook has been removed or made conditional on the shipping build. `cust` is the factory default, so without the reset the scooter stays in `cust` across reboots and nothing on the network can reach 50005 or 5555.
+
+From a `cust`-at-boot scooter you cannot:
+
+- reach gRPC on 50005, so `scripts/inject-adb-key.sh` and every `grpcurl` call fail;
+- reach ADB over Wi-Fi on 5555;
+- flip the scootermode from HHMIC. HHMIC's **560095** manufacturing PIN only opens its own Manufacturing App screen (QR / hardware info / OTP, in `ManufacturingManager.launchMfgApplication`); it never calls `SystemProperties.set` on `persist.ola.security.scootermode`. The only app that writes `mfg` / `serv` into that property is **HMFG** (`com.ola.mfgapp`), from its `VehicleModeDialogBinding` (`customerMode` / `productionMode` / `serviceMode` / `notDefined` radio buttons). Reaching HMFG from a laptop still needs a working transport.
+
+Ways in when the network is firewalled:
+
+- **USB ADB.** Some units expose ADB over USB-C even when Wi-Fi ADB is blocked by iptables (the DROP is on INPUT, not on `adbd` itself). Try this first; it bypasses the port rules entirely.
+- **Dealer / service-centre tool.** Their rig talks to HMFG and can set `serviceMode`, which has the same open-ports effect as `mfg`. Once set, it persists across reboots on builds without the post-fs-data override.
+- **Reflashing / unlocked boot.** Out of scope here and risky.
+
+Without one of those, the scooter is sealed at the network level and this doc's recovery steps don't apply.
+
+## The HHMIC Manufacturing App passcode (`560095`)
+
+Not a scootermode switch, but relevant because it keeps getting confused with one.
+
+Stock HHMIC has a hidden "Manufacturing App" screen gated by a six-digit PIN. Decompiled from HHMIC on this scooter:
+
+- `com/olaelectric/hmiclient/manufacturingApp/ManufacturingManager.smali`:
+  ```
+  .field private static final DEFAULT_PASSCODE:Ljava/lang/String; = "560095"
+  .field private static final JSON_FILE_PATH:Ljava/lang/String; = "/data/ola/v-op-mode.json"
+  ```
+- `HPMS/.../data/constants/ConstantsKt.smali` repeats it as `DEFAULT_PASSWORD_2 = "560095"` (with `DEFAULT_PASSWORD_3 = "123456"`).
+- Kanzi UI: popup `Screens/.../PopupContainer/MFG_Passcode_PopUp` with its keypad under `Prefabs/Passcode_ManufactureApp/.../Invisible_Button/Grid Layout 2D/Button_1..9`.
+
+How it is reached: the Kanzi UI emits an action string (`ACTION_LAUNCH_MANUFACTURINGAPP` or `ACTION_SHOW_SW_VERSION_HISTORY`) into `ManufacturingManager.handleMessage`, which calls `launchMfgAppPasscode()` to show the popup. The hidden tap target that emits the action lives in the Kanzi binary graph (one of the `Invisible_Button` nodes on an About / Settings / Splash screen); the kzb text dump shows the popup and keypad but not the button bindings, so the exact tap sequence can only be read with a Kanzi tool. The `560095` the user types is compared in `checkForPassword`:
+
+```
+const-string v0, "560095"
+invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+# on true -> launchMfgApplication()  or  toggleVersionInfoScreen(true)
+```
+
+What `560095` **does not** do:
+
+- It does not change `persist.ola.security.scootermode`. HHMIC never calls `SystemProperties.set` on that key. It only reads `/data/ola/v-op-mode.json` to display the current mode.
+- Its enum has only `VEHICLE_OP_STATE_NONE`, `VEHICLE_OP_STATE_MFG`, `VEHICLE_OP_STATE_CUST`. There is no `SERVICE` state in HHMIC.
+- So entering `560095` on a `cust`-at-boot scooter will not open the gRPC or ADB ports.
+
+What it **does** do: shows the Manufacturing App (QR-code setup, hardware info / version history, OTP entry via `RSAEncryptor.validateOtp`). Useful for reading VINs and software versions from the dashboard; not useful for recovering network access.
+
+## Switching scootermode: the HMFG app (`com.ola.mfgapp`)
+
+The separate on-head-unit APK `HMFG` is the only client that writes `persist.ola.security.scootermode`.
+
+- `com/ola/mfgapp/databinding/VehicleModeDialogBinding.smali`: four radio buttons — `customerMode`, `productionMode`, `serviceMode`, `notDefined`.
+- `com/ola/mfgapp/MainActivity.smali` writes the raw strings:
+  ```
+  const-string v1, "mfg"
+  const-string v1, "serv"
+  ```
+- `PreferenceHelper.PREF_SERVICE_VALUE = "Service_mode"`.
+- Local IPC uses `CONNECTED_APP_TO_MFG` / `EVT_CONNECTION_APP_TO_MFG` and talks to the diagnostics gRPC service on port 50005.
+
+Practical consequence: setting `serviceMode` from HMFG has the same `open_port` effect as `mfg` (see the init hook above) and **persists across reboots on builds without the `on post-fs-data` override**. That is why a dealer-tool pass can unlock the ports on a MoveOS 4.0.1 scooter that boots sealed.
+
+On this scooter HMFG is reachable because the ports are open at boot; from the diagnostics shell:
+
+```
+run "setprop persist.ola.security.scootermode serv"
+```
+
+has the same effect without opening the HMFG UI. The property change triggers the `open_port` service directly.
 
 ## The "white screen after Doze" failure mode (2026-11-09)
 
