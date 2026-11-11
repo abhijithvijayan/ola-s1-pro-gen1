@@ -109,13 +109,40 @@ Stock HHMIC has a hidden "Manufacturing App" screen gated by a six-digit PIN. De
 - `HPMS/.../data/constants/ConstantsKt.smali` repeats it as `DEFAULT_PASSWORD_2 = "560095"` (with `DEFAULT_PASSWORD_3 = "123456"`).
 - Kanzi UI: popup `Screens/.../PopupContainer/MFG_Passcode_PopUp` with its keypad under `Prefabs/Passcode_ManufactureApp/.../Invisible_Button/Grid Layout 2D/Button_1..9`.
 
-How it is reached: the Kanzi UI emits an action string (`ACTION_LAUNCH_MANUFACTURINGAPP` or `ACTION_SHOW_SW_VERSION_HISTORY`) into `ManufacturingManager.handleMessage`, which calls `launchMfgAppPasscode()` to show the popup. The hidden tap target that emits the action lives in the Kanzi binary graph (one of the `Invisible_Button` nodes on an About / Settings / Splash screen); the kzb text dump shows the popup and keypad but not the button bindings, so the exact tap sequence can only be read with a Kanzi tool. The `560095` the user types is compared in `checkForPassword`:
+How it is reached: the Kanzi UI emits an action string (`ACTION_LAUNCH_MANUFACTURINGAPP` or `ACTION_SHOW_SW_VERSION_HISTORY`) into `ManufacturingManager.handleMessage`, which calls `launchMfgAppPasscode()` to show the popup. The hidden tap target that emits the action lives in the Kanzi binary graph (one of the `Invisible_Button` nodes on an About / Settings / Splash screen); the kzb text dump shows the popup and keypad but not the button bindings, so the exact tap sequence can only be read with a Kanzi tool. The dispatch in `checkForPassword` is **mode-sensitive**:
 
 ```
-const-string v0, "560095"
-invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
-# on true -> launchMfgApplication()  or  toggleVersionInfoScreen(true)
+if (currentVehicleMode == VEHICLE_OP_STATE_CUST) {
+    ok = rsaEncryptor.validateOtp(input);     // on a customer scooter
+} else {
+    ok = input.equals("560095");               // only in MFG / NONE
+}
+if (ok) launchMfgApplication()    // or toggleVersionInfoScreen(true)
 ```
+
+`currentVehicleMode` is read at startup from `/data/ola/v-op-mode.json` (`current_op_mode`: `"2"` → CUST, anything else → not CUST). **So 560095 only works when the vehicle-op-mode JSON says the scooter is not CUST.** A production scooter in the owner's hands is CUST, which is why the static PIN is rejected and the keypad entry is validated as an OTP instead.
+
+### The QR code and the OTP (CUST path)
+
+When the popup opens on a CUST scooter, `setQRCode()` calls `rsaEncryptor.Encrypt(0, vinNumber)` and shows the result as a QR. The plaintext before encryption is built by `generateEncoderData`:
+
+```
+mode 0:  "Manufacturing$" + vin + "$" + otp + "$" + systemTimeMs
+mode 1:  "Diagnostics$"   + vin + "$" + otp + "$" + systemTimeMs
+```
+
+- `otp` is a random six-digit number (`random.nextInt(999_999)`, `%06d`).
+- Encryption uses a PEM public key loaded from disk (`RSAEncryptor.loadPublicKeyFile`, `-----BEGIN PUBLIC KEY-----`).
+- The QR is a base64 string of the RSA-encrypted bytes (480 base64 chars ≈ 360 bytes ≈ a few RSA-2048 blocks).
+- A fresh QR (and a fresh OTP) is generated every `QR_VALIDITY_TIME = 300` seconds.
+
+The flow at a service centre: tech scans the QR with their internal app → the app RSA-decrypts the payload with the matching **private** key → extracts the 6-digit OTP → the user types that OTP into the dashboard keypad → `validateOtp` compares it to the one the dashboard generated → unlock. The private key is not on the scooter and not in HHMIC.
+
+The same mechanism gates the Version History screen (`launchVersionInfoPasscode` / `ACTION_SHOW_SW_VERSION_HISTORY`). Owners have reported reaching it by tapping the regen details on the battery screen multiple times.
+
+### Can you bypass it without the private key?
+
+Only by changing the stored mode. Edit `/data/ola/v-op-mode.json` from the diagnostics shell so `current_op_mode` is not `"2"`, then enter `560095`. The change holds until HHMIC overwrites the file (its `clearInitValues` resets it to NONE, and the full "join-fleet" flow writes it back to CUST on OTP success). Risky; you lose features gated on CUST and the OTA pipeline expects CUST.
 
 What `560095` **does not** do:
 
