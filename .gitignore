@@ -116,3 +116,7 @@ fabric.properties
 # End of https://www.toptal.com/developers/gitignore/api/webstorm+all
 __pycache__/
 CLAUDE.md
+
+# Scooter key material pulled off the device; private, never commit
+backups/
+local/mfg-keys/

@@ -1,5 +1,21 @@
 # Scootermode (`persist.ola.security.scootermode`) and recovering a stuck stock dashboard
 
+## Terminology
+
+Two independent values share the word "mode". This document uses distinct names for each; they are not linked in code.
+
+| Name used in this document | Android property / file | Values | Written by | Effect |
+|---|---|---|---|---|
+| **scootermode** | `persist.ola.security.scootermode` (Android system property, read by init) | `mfg`, `cust`, `serv` | HMFG app; init `on post-fs-data` hook; `setprop` from a root shell | iptables on ports 50005 and 5555 (ADB over Wi-Fi and diagnostics gRPC). `cust` drops the packets; `mfg` and `serv` accept them. |
+| **vehicle-op-mode** | `/data/ola/v-op-mode.json`, field `current_op_mode` (file on disk, read by HHMIC at startup) | `0` NONE, `1` MFG, `2` CUST | HHMIC `ManufacturingManager` | Branch taken by `ManufacturingManager.checkForPassword` for the dashboard keypad: `2` (CUST) validates input as an OTP via QR; any other value accepts the static `560095`. |
+
+`ManufacturingManager` does not call `SystemProperties.set` on `persist.ola.security.scootermode`, and the init property-change handlers do not read the JSON. A change to one has no effect on the other:
+
+- Editing the vehicle-op-mode JSON does not alter iptables and does not open or close the diagnostics ports.
+- Setting the scootermode property to `cust` closes the ports immediately for the rest of the boot. On builds that include the `on post-fs-data` reset, the next boot restores `mfg` and reopens them.
+
+## Background
+
 Findings from the 2026-11-09 device session. The scooter had been running normally, a third-party dashboard app was uninstalled, then after a reboot the stock dashboard came up with a white screen. This doc captures what we learned about `scootermode`, the init-time behaviour that controls ADB/gRPC access, and a safe recovery path for the "white screen after Doze" failure mode.
 
 ## The property
@@ -120,7 +136,7 @@ if (currentVehicleMode == VEHICLE_OP_STATE_CUST) {
 if (ok) launchMfgApplication()    // or toggleVersionInfoScreen(true)
 ```
 
-`currentVehicleMode` is read at startup from `/data/ola/v-op-mode.json` (`current_op_mode`: `"2"` → CUST, anything else → not CUST). **So 560095 only works when the vehicle-op-mode JSON says the scooter is not CUST.** A production scooter in the owner's hands is CUST, which is why the static PIN is rejected and the keypad entry is validated as an OTP instead.
+`currentVehicleMode` is read at startup from the **vehicle-op-mode JSON** at `/data/ola/v-op-mode.json` (`current_op_mode`: `"2"` → CUST, anything else → not CUST). **So 560095 only works when the vehicle-op-mode JSON says the scooter is not CUST.** A production scooter in the owner's hands is CUST, which is why the static PIN is rejected and the keypad entry is validated as an OTP instead.
 
 ### The QR code and the OTP (CUST path)
 
@@ -142,7 +158,14 @@ The same mechanism gates the Version History screen (`launchVersionInfoPasscode`
 
 ### Can you bypass it without the private key?
 
-Only by changing the stored mode. Edit `/data/ola/v-op-mode.json` from the diagnostics shell so `current_op_mode` is not `"2"`, then enter `560095`. The change holds until HHMIC overwrites the file (its `clearInitValues` resets it to NONE, and the full "join-fleet" flow writes it back to CUST on OTP success). Risky; you lose features gated on CUST and the OTA pipeline expects CUST.
+Changing the stored vehicle-op-mode to any value other than CUST (`2`) makes `checkForPassword` take the static-password branch, which accepts `560095`. This has no effect on the scootermode property and does not alter diagnostic port access. HHMIC reads the JSON at startup, so the process must be restarted for the change to take effect:
+
+```
+echo '{"current_op_mode":0,"modified_ts":0,"modified_ts_str":"","modified_by":""}' > /data/ola/v-op-mode.json
+am force-stop com.olaelectric.hmiclient
+```
+
+The change persists until HHMIC overwrites the file. `ManufacturingManager.clearInitValues` resets `current_op_mode` to `0` (NONE) on close, and the join-fleet flow writes it back to `2` (CUST) after a valid OTP. Cloud services and the OTA pipeline expect CUST, so features that depend on either may stop working.
 
 What `560095` **does not** do:
 

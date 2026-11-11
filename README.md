@@ -232,7 +232,58 @@ adb connect <your-ip>:5555
 > OTA app. See [research/reboot-analysis.md](research/reboot-analysis.md) for details.
 > A proper fix (patching the HOHS watchdog) is in progress.
 
-### 5. Pull the dashboard APK (optional)
+### 5. Back up the stock keys (recommended, one-time)
+
+Pull the scooter's OEM boot / FOTA public keys, the Manufacturing / Diagnostics
+public keys HHMIC uses to encrypt its QR, and the authorised ADB keys. Keep the
+output in a private location so a future firmware update or recovery has the
+originals to restore from. Read-only; nothing is written to the scooter.
+
+```bash
+SCOOTER_IP=<your-ip> bash scripts/backup-stock-keys.sh
+```
+
+Writes `backups/scooter-keys-<ip>-<timestamp>/` with:
+
+- the on-device layout mirrored under `vendor/etc/...` and `data/misc/adb/`;
+- `MANIFEST.txt` (SHA-256 and size per file);
+- `README.md` with the device fingerprint (build, serial, scootermode).
+
+Move the folder to a private git repo; do not commit it here (the `backups/`
+path is in `.gitignore`).
+
+### 6. Swap the Manufacturing / Diagnostics QR keys (optional, advanced)
+
+HHMIC's hidden Manufacturing / Version-History keypad generates a 6-digit OTP,
+encrypts it with a public key on the scooter and shows the ciphertext as a QR
+for the dealer tool to decrypt. On a CUST scooter the keypad accepts only that
+OTP, not the static `560095`. Swapping the on-device public key with one you
+hold the private half of makes those QRs decryptable with your private key.
+See [docs/scootermode-and-recovery.md](docs/scootermode-and-recovery.md) for
+the full background and caveats.
+
+```bash
+SCOOTER_IP=<your-ip> bash scripts/swap-mfg-keys.sh    # idempotent
+SCOOTER_IP=<your-ip> bash scripts/revert-mfg-keys.sh  # restore stock keys
+```
+
+`swap-mfg-keys.sh`:
+
+- runs `backup-stock-keys.sh` first so there is always a fresh backup;
+- generates `local/mfg-keys/mfg.key` + `.pub.pem` (reused across runs);
+- saves the stock PEMs into `local/mfg-keys/stock-originals/` **once** and
+  never overwrites that saved copy on re-runs;
+- remounts `/vendor` rw, writes our public key into both PEMs, remounts ro,
+  and force-stops `com.olaelectric.hmiclient` so the next keypad use picks up
+  the new key.
+
+`revert-mfg-keys.sh` restores the saved stock PEMs. It refuses to run if a
+saved original is missing.
+
+Side effects while swapped: cloud / dealer tools cannot decrypt QRs from this
+scooter; a firmware update that reflashes `/vendor` restores the stock key.
+
+### 7. Pull the dashboard APK (optional)
 
 ```bash
 adb pull /system/priv-app/HHMIC/HHMIC.apk
