@@ -395,6 +395,8 @@ python3 scripts/scooter_cmd.py uds-list
 |-----|-------|
 | [docs/network-probe-and-root.md](docs/network-probe-and-root.md) | gRPC root access, command pattern, shell limitations, `${IFS}` trick |
 | [docs/adb-key-injection.md](docs/adb-key-injection.md) | ADB key injection: how Gen 1 key auth works, step-by-step, reverting |
+| [docs/scootermode-and-recovery.md](docs/scootermode-and-recovery.md) | `persist.ola.security.scootermode` vs `/data/ola/v-op-mode.json`, port access rules, `560095` manufacturing passcode + QR-OTP flow, HMFG mode switch, recovery paths |
+| [docs/opening-sealed-scooter.md](docs/opening-sealed-scooter.md) | How to install an APK on a MoveOS build that boots with the diagnostic port firewalled: captive-portal WebView, HDUX fallback, USB-C OTG, and whether an APK can flip the mode back itself |
 | [docs/hmi-apk-analysis.md](docs/hmi-apk-analysis.md) | 410MB HMI APK breakdown: Kanzi scene, themes, data contexts, native libs |
 | [docs/architecture.md](docs/architecture.md) | Hardware architecture, CAN bus, data flow, boot sequence, cloud connectivity |
 | [docs/research-roadmap.md](docs/research-roadmap.md) | Research & implementation roadmap: what to explore, build, and learn next |
