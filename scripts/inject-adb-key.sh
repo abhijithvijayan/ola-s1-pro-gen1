@@ -9,8 +9,9 @@
 #   2. Adds a trailing newline (existing file may not have one)
 #   3. Base64-encodes your ~/.android/adbkey.pub (so it's a single space-free token)
 #   4. Sends it over gRPC, decoded and appended on the device
-#   5. Sets service.adb.tcp.port=5555 so adbd restarts in TCP mode
-#   6. Restarts adbd to pick up the new key and the TCP port
+#   5. Sets persist/service.adb.tcp.port=5555 so adbd listens on TCP
+#   6. Restarts adbd with `ctl.restart` (not stop/start, which leaves it in
+#      USB mode) and waits for it to listen on 5555
 #
 # The ${IFS} trick: the gRPC daemon splits arguments on whitespace.
 # Replacing spaces with the literal text ${IFS} keeps the whole sh -c
@@ -46,6 +47,18 @@ grpc() {
     "$SCOOTER" wifican.WifiCanRpc/ExecuteADBCommand
 }
 
+# The command's stdout (ExecuteADBCommand returns it in statusMsg), for
+# reading device state. The command is sent verbatim; a pipeline must be
+# written as `sh -c ...` with ${IFS} in place of spaces, since the daemon
+# splits the message on whitespace (see the ${IFS} note above).
+grpc_out() {
+  grpcurl -plaintext \
+    -import-path "$PROTO_DIR/proto" -proto "$PROTO" \
+    -d "{\"cmd_msg\": \"$1\"}" \
+    "$SCOOTER" wifican.WifiCanRpc/ExecuteADBCommand 2>/dev/null \
+    | sed -n 's/.*"statusMsg": "\(.*\)"/\1/p'
+}
+
 if [ ! -f ~/.android/adbkey.pub ]; then
   echo "Error: ~/.android/adbkey.pub not found."
   echo "Run 'adb start-server' first to generate your ADB keypair."
@@ -77,15 +90,43 @@ CMD="sh -c grep\${IFS}-q\${IFS}${MARKER}\${IFS}/data/misc/adb/adb_keys||echo\${I
 grpc "$CMD"
 
 echo "[5/6] Enabling TCP mode on adbd..."
+# Both: service.* is the live lever adbd reads at (re)start, persist.* keeps
+# it across a reboot.
+grpc "setprop persist.adb.tcp.port 5555"
 grpc "setprop service.adb.tcp.port 5555"
 
-echo "[6/6] Restarting adbd..."
-grpc "stop adbd"
-sleep 1
-grpc "start adbd"
+echo "[6/6] Restarting adbd on the TCP port..."
+# `stop adbd; start adbd` leaves adbd running in USB mode on this build — it
+# comes back without binding TCP, so `adb connect :5555` is refused though
+# the port property is set and the firewall accepts 5555. `ctl.restart`
+# forces init to re-exec adbd, which then reads service.adb.tcp.port and
+# listens on TCP.
+grpc "setprop ctl.restart adbd"
 
 echo ""
-echo "=== Done ==="
+echo "Waiting for adbd to listen on 5555..."
+listening=""
+for _ in 1 2 3 4 5 6 7 8; do
+  sleep 1
+  # Grep on the device (statusMsg comes back as one escaped-newline line, so
+  # host-side line matching does not work): count LISTEN sockets (state 0A)
+  # on local port 15B3 (5555), IPv4 or IPv6. A non-zero count means bound.
+  # ${IFS} is literal here (single quotes) and is expanded on the device.
+  case "$(grpc_out 'sh -c cat${IFS}/proc/net/tcp${IFS}/proc/net/tcp6|grep${IFS}-c${IFS}-iE${IFS}:15B3.*0A')" in
+    *[1-9]*) listening="yes"; break ;;
+  esac
+done
+
+echo ""
+if [ -n "$listening" ]; then
+  echo "=== Done: adbd is listening on 5555 ==="
+else
+  echo "=== Done, but adbd is NOT listening on 5555 yet ==="
+  echo "Re-run this script, or restart adbd again:"
+  echo "  grpcurl ... -d '{\"cmd_msg\":\"setprop ctl.restart adbd\"}' ${SCOOTER} wifican.WifiCanRpc/ExecuteADBCommand"
+  echo "If it still refuses, the build may gate Wi-Fi ADB; use USB-C ADB"
+  echo "(docs/opening-sealed-scooter.md, scootermode-and-recovery.md)."
+fi
 echo ""
 echo "Connect with:  adb connect ${SCOOTER_IP}:5555"
 echo "Verify with:   adb -s ${SCOOTER_IP}:5555 shell id"
